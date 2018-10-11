@@ -11,14 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
 class Game {
     constructor(ctx) {
         //Canvas
-        this.canvasWidth = 700;
-        this.canvasHeight = 700;
+        this.canvasWidth = 600;
+        this.canvasHeight = 600;
         this.ctx = ctx;
         this.mark1 = "X";
         this.mark2 = "Y";
-        this.firstColumnLine = this.canvasWidth / 3;
+        this.firstColumnLine = this.canvasWidth * (1/3);
         this.secondColumnLine = this.canvasWidth * (2/3);
-        this.firstRowLine = this.canvasHeight / 3;
+        this.firstRowLine = this.canvasHeight * (1/3);
         this.secondRowLine = this.canvasHeight * (2/3);
         this.readClick = this.readClick.bind(this);
     }
@@ -26,11 +26,15 @@ class Game {
     drawBoard() {
         this.ctx.fillStyle = "#ffffff";
         //first column
-        this.ctx.rect(this.firstColumnLine - 5, 0, 10, this.canvasHeight);
-        //second column
-        this.ctx.rect(this.secondColumnLine - 5, 0, 10, this.canvasHeight);
-        this.ctx.rect(0, this.firstRowLine - 5, this.canvasWidth, 10);
-        this.ctx.rect(0, this.secondRowLine - 5, this.canvasWidth, 10);
+        this.ctx.rect(this.firstColumnLine - 2.5, 0, 5, this.canvasHeight);
+        // //second column
+        this.ctx.rect(this.secondColumnLine - 2.5, 0, 5, this.canvasHeight);
+        this.ctx.rect(0, this.firstRowLine - 2.5, this.canvasWidth, 5);
+        this.ctx.rect(0, this.secondRowLine - 2.5, this.canvasWidth, 5);
+        // this.ctx.beginPath();
+        // this.ctx.moveTo(this.firstColumnLine, 0);
+
+        
         this.ctx.fill();
    
     }
@@ -45,44 +49,46 @@ class Game {
         if (x < this.firstColumnLine) {
             if (y < this.firstRowLine) {
                 console.log("top left");
-                this.drawO((this.firstColumnLine - 10) / 2, (this.firstRowLine - 10) / 2);
+                this.drawO(this.firstColumnLine / 2, (this.firstRowLine) / 2);
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
-                this.drawO((this.firstColumnLine - 10) / 2, (this.canvasHeight / 2) - 7.5);
+                this.drawO(this.firstColumnLine / 2, (this.canvasHeight / 2));
                 console.log("middle left");
             }
             if (y > this.secondRowLine) {
-                this.drawO((this.firstColumnLine - 10) / 2, this.canvasHeight * (5/6));
+                this.drawO(this.firstColumnLine / 2, this.canvasHeight * (5/6));
                 console.log("bottom left");
             }
         }
         else if (x > this.firstColumnLine && x < this.secondColumnLine) {
             if (y < this.firstRowLine) {
+                this.drawO(this.secondColumnLine * (3/4), this.firstRowLine / 2);
                 console.log("top middle");
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
+                this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight / 2);
                 console.log("dead center");
             }
             if (y > this.secondRowLine) {
+                this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight * (5 / 6));
                 console.log("bottom middle");
             }
         }
         else if (x > this.secondColumnLine) {
             if (y < this.firstRowLine) {
                 console.log("top right");
+                this.drawO(this.canvasWidth * (5 / 6), this.firstRowLine / 2);
+
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
-                console.log("middle right");
+                this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight / 2);
+
             }
             if (y > this.secondRowLine) {
-                console.log("bottom right");
+                this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight * (5 / 6));
+
             }
         }
-    }
-
-    drawX(x, y) {
-        this.beginPath();
-        
     }
 
     drawO(x, y){
@@ -91,9 +97,18 @@ class Game {
         console.log(y);
         this.ctx.beginPath();
         this.ctx.arc(x, y, this.firstColumnLine / 2 - 10, 0, Math.PI * 2);
-        this.ctx.fillStyle = "#ffffff";
-        this.ctx.fill();
+        this.ctx.strokeStyle = "#ffffff";
+        this.ctx.lineWidth = 10;
+        this.ctx.stroke();
         this.ctx.closePath();
+    }
+
+    drawX(x, y) {
+        this.ctx.lineTo()
+    }
+
+    drawX(x, y) {
+        this.beginPath();
     }
 
     bindKeys() {
