@@ -26,11 +26,15 @@ class Game {
     drawBoard() {
         this.ctx.fillStyle = "#ffffff";
         //first column
-        this.ctx.rect(this.firstColumnLine - 5, 0, 5, this.canvasHeight);
-        //second column
-        this.ctx.rect(this.secondColumnLine - 5, 0, 5, this.canvasHeight);
-        this.ctx.rect(0, this.firstRowLine - 5, this.canvasWidth, 5);
-        this.ctx.rect(0, this.secondRowLine - 5, this.canvasWidth, 5);
+        this.ctx.rect(this.firstColumnLine - 2.5, 0, 5, this.canvasHeight);
+        // //second column
+        this.ctx.rect(this.secondColumnLine - 2.5, 0, 5, this.canvasHeight);
+        this.ctx.rect(0, this.firstRowLine - 2.5, this.canvasWidth, 5);
+        this.ctx.rect(0, this.secondRowLine - 2.5, this.canvasWidth, 5);
+        // this.ctx.beginPath();
+        // this.ctx.moveTo(this.firstColumnLine, 0);
+
+        
         this.ctx.fill();
    
     }
@@ -45,43 +49,43 @@ class Game {
         if (x < this.firstColumnLine) {
             if (y < this.firstRowLine) {
                 console.log("top left");
-                this.drawO((this.firstColumnLine - 10) / 2, (this.firstRowLine) / 2);
+                this.drawO(this.firstColumnLine / 2, (this.firstRowLine) / 2);
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
-                this.drawO((this.firstColumnLine - 10) / 2, (this.canvasHeight / 2));
+                this.drawO(this.firstColumnLine / 2, (this.canvasHeight / 2));
                 console.log("middle left");
             }
             if (y > this.secondRowLine) {
-                this.drawO((this.firstColumnLine - 10) / 2, this.canvasHeight * (5/6));
+                this.drawO(this.firstColumnLine / 2, this.canvasHeight * (5/6));
                 console.log("bottom left");
             }
         }
         else if (x > this.firstColumnLine && x < this.secondColumnLine) {
             if (y < this.firstRowLine) {
-                this.drawO((this.secondColumnLine - 10) * (3/4), this.firstRowLine / 2);
+                this.drawO(this.secondColumnLine * (3/4), this.firstRowLine / 2);
                 console.log("top middle");
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
-                this.drawO((this.secondColumnLine - 10) * (3 / 4), this.canvasHeight / 2);
+                this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight / 2);
                 console.log("dead center");
             }
             if (y > this.secondRowLine) {
-                this.drawO((this.secondColumnLine - 10) * (3 / 4), this.canvasHeight * (5 / 6));
+                this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight * (5 / 6));
                 console.log("bottom middle");
             }
         }
         else if (x > this.secondColumnLine) {
             if (y < this.firstRowLine) {
                 console.log("top right");
-                this.drawO((this.canvasWidth - 10) * (5 / 6), this.firstRowLine / 2);
+                this.drawO(this.canvasWidth * (5 / 6), this.firstRowLine / 2);
 
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
-                this.drawO((this.canvasWidth - 10) * (5 / 6), this.canvasHeight / 2);
+                this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight / 2);
 
             }
             if (y > this.secondRowLine) {
-                this.drawO((this.canvasWidth - 10) * (5 / 6), this.canvasHeight * (5 / 6));
+                this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight * (5 / 6));
 
             }
         }
@@ -97,6 +101,10 @@ class Game {
         this.ctx.lineWidth = 10;
         this.ctx.stroke();
         this.ctx.closePath();
+    }
+
+    drawX(x, y) {
+        this.ctx.lineTo()
     }
 
     drawX(x, y) {
