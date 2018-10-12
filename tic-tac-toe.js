@@ -16,6 +16,7 @@ class Game {
         this.ctx = ctx;
         this.mark1 = "X";
         this.mark2 = "Y";
+        this.cellSize = this.canvasWidth * (1/3);
         this.firstColumnLine = this.canvasWidth * (1/3);
         this.secondColumnLine = this.canvasWidth * (2/3);
         this.firstRowLine = this.canvasHeight * (1/3);
@@ -25,18 +26,11 @@ class Game {
 
     drawBoard() {
         this.ctx.fillStyle = "#ffffff";
-        //first column
         this.ctx.rect(this.firstColumnLine - 2.5, 0, 5, this.canvasHeight);
-        // //second column
         this.ctx.rect(this.secondColumnLine - 2.5, 0, 5, this.canvasHeight);
         this.ctx.rect(0, this.firstRowLine - 2.5, this.canvasWidth, 5);
         this.ctx.rect(0, this.secondRowLine - 2.5, this.canvasWidth, 5);
-        // this.ctx.beginPath();
-        // this.ctx.moveTo(this.firstColumnLine, 0);
-
-        
         this.ctx.fill();
-   
     }
 
     readClick(e) {
@@ -48,45 +42,36 @@ class Game {
 
         if (x < this.firstColumnLine) {
             if (y < this.firstRowLine) {
-                console.log("top left");
-                this.drawO(this.firstColumnLine / 2, (this.firstRowLine) / 2);
+                // this.drawO(this.firstColumnLine / 2, (this.firstRowLine) / 2);
+                this.drawX(this.firstColumnLine / 2, (this.firstRowLine) / 2);
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
                 this.drawO(this.firstColumnLine / 2, (this.canvasHeight / 2));
-                console.log("middle left");
             }
             if (y > this.secondRowLine) {
                 this.drawO(this.firstColumnLine / 2, this.canvasHeight * (5/6));
-                console.log("bottom left");
             }
         }
         else if (x > this.firstColumnLine && x < this.secondColumnLine) {
             if (y < this.firstRowLine) {
                 this.drawO(this.secondColumnLine * (3/4), this.firstRowLine / 2);
-                console.log("top middle");
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
                 this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight / 2);
-                console.log("dead center");
             }
             if (y > this.secondRowLine) {
                 this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight * (5 / 6));
-                console.log("bottom middle");
             }
         }
         else if (x > this.secondColumnLine) {
             if (y < this.firstRowLine) {
-                console.log("top right");
                 this.drawO(this.canvasWidth * (5 / 6), this.firstRowLine / 2);
-
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
                 this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight / 2);
-
             }
             if (y > this.secondRowLine) {
                 this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight * (5 / 6));
-
             }
         }
     }
@@ -104,11 +89,19 @@ class Game {
     }
 
     drawX(x, y) {
-        this.ctx.lineTo()
-    }
+        console.log("indrawx")
+        console.log(x, y)
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = "#ffffff";
+        this.ctx.lineWidth = 10;
 
-    drawX(x, y) {
-        this.beginPath();
+        this.ctx.moveTo(x - (this.cellSize) / 2, y - (this.cellSize / 2));
+        this.ctx.lineTo(x + (this.cellSize) / 2, y + (this.cellSize / 2));
+        this.ctx.moveTo(x - (this.cellSize) / 2, y + (this.cellSize / 2));
+        this.ctx.lineTo(x + (this.cellSize) / 2, y - (this.cellSize / 2));
+
+        this.ctx.stroke();
+        this.ctx.closePath();
     }
 
     bindKeys() {
