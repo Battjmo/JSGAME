@@ -16,6 +16,9 @@ class Game {
         this.ctx = ctx;
         this.mark1 = "X";
         this.mark2 = "Y";
+        this.board = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
+        this.currentPlayer = this.mark1;
+        this.cellSize = this.canvasWidth * (1/3);
         this.firstColumnLine = this.canvasWidth * (1/3);
         this.secondColumnLine = this.canvasWidth * (2/3);
         this.firstRowLine = this.canvasHeight * (1/3);
@@ -25,18 +28,11 @@ class Game {
 
     drawBoard() {
         this.ctx.fillStyle = "#ffffff";
-        //first column
         this.ctx.rect(this.firstColumnLine - 2.5, 0, 5, this.canvasHeight);
-        // //second column
         this.ctx.rect(this.secondColumnLine - 2.5, 0, 5, this.canvasHeight);
         this.ctx.rect(0, this.firstRowLine - 2.5, this.canvasWidth, 5);
         this.ctx.rect(0, this.secondRowLine - 2.5, this.canvasWidth, 5);
-        // this.ctx.beginPath();
-        // this.ctx.moveTo(this.firstColumnLine, 0);
-
-        
         this.ctx.fill();
-   
     }
 
     readClick(e) {
@@ -48,53 +44,95 @@ class Game {
 
         if (x < this.firstColumnLine) {
             if (y < this.firstRowLine) {
-                console.log("top left");
-                this.drawO(this.firstColumnLine / 2, (this.firstRowLine) / 2);
+                if (this.currentPlayer === this.mark1) {
+                    this.drawX(this.firstColumnLine / 2, (this.firstRowLine) / 2);
+                    this.board[0][0] = this.mark1;
+                } else {
+                    this.drawO(this.firstColumnLine / 2, (this.firstRowLine) / 2);
+                    this.board[0][0] = this.mark2;
+                }
+                this.switchPlayer();
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
-                this.drawO(this.firstColumnLine / 2, (this.canvasHeight / 2));
-                console.log("middle left");
+                if (this.currentPlayer === this.mark1) {
+                    this.drawX(this.firstColumnLine / 2, (this.canvasHeight / 2));
+                    this.board[1][0] = this.mark1;
+                } else { 
+                    this.drawO(this.firstColumnLine / 2, (this.canvasHeight / 2));
+                    this.board[1][0] = this.mark2;
+                }
+                this.switchPlayer();
             }
             if (y > this.secondRowLine) {
-                this.drawO(this.firstColumnLine / 2, this.canvasHeight * (5/6));
-                console.log("bottom left");
+                if (this.currentPlayer === this.mark1) {
+                    this.drawX(this.firstColumnLine / 2, this.canvasHeight * (5 / 6));
+                    this.board[2][0] = this.mark1;
+                } else {
+                    this.drawO(this.firstColumnLine / 2, this.canvasHeight * (5 / 6));
+                    this.board[2][0] = this.mark2;
+                }
+                this.switchPlayer();
             }
         }
         else if (x > this.firstColumnLine && x < this.secondColumnLine) {
+
             if (y < this.firstRowLine) {
-                this.drawO(this.secondColumnLine * (3/4), this.firstRowLine / 2);
-                console.log("top middle");
+                if (this.currentPlayer === this.mark1) {
+                    this.drawX(this.secondColumnLine * (3 / 4), this.firstRowLine / 2);
+                } else {
+                    this.drawO(this.secondColumnLine * (3 / 4), this.firstRowLine / 2);
+                }
+                this.switchPlayer();
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
-                this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight / 2);
-                console.log("dead center");
+                if (this.currentPlayer === this.mark1) {
+                    this.drawX(this.secondColumnLine * (3 / 4), this.canvasHeight / 2);
+                } else {
+                    this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight / 2);
+                }
+                this.switchPlayer();
+                
             }
             if (y > this.secondRowLine) {
-                this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight * (5 / 6));
-                console.log("bottom middle");
+                if (this.currentPlayer === this.mark1) {
+                    this.drawX(this.secondColumnLine * (3 / 4), this.canvasHeight * (5 / 6));
+                } else {
+                    this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight * (5 / 6));
+                }
+                this.switchPlayer();
             }
         }
         else if (x > this.secondColumnLine) {
             if (y < this.firstRowLine) {
-                console.log("top right");
-                this.drawO(this.canvasWidth * (5 / 6), this.firstRowLine / 2);
+                if (this.currentPlayer === this.mark1) {
+                    this.drawX(this.canvasWidth * (5 / 6), this.firstRowLine / 2);
+                } else {
+                    this.drawO(this.canvasWidth * (5 / 6), this.firstRowLine / 2);
+                }
+                this.switchPlayer();
 
             }
             if (y > this.firstRowLine && y < this.secondRowLine) {
-                this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight / 2);
-
+                if (this.currentPlayer === this.mark1) {
+                    this.drawX(this.canvasWidth * (5 / 6), this.canvasHeight / 2);
+                } else {
+                    this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight / 2);
+                }
+                this.switchPlayer();
+              
             }
             if (y > this.secondRowLine) {
-                this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight * (5 / 6));
-
+                if (this.currentPlayer === this.mark1) {
+                    this.drawX(this.canvasWidth * (5 / 6), this.canvasHeight * (5 / 6));
+                } else {
+                    this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight * (5 / 6));
+                }
+                this.switchPlayer();
             }
         }
     }
 
     drawO(x, y){
-        console.log("in drawO");
-        console.log(x);
-        console.log(y);
         this.ctx.beginPath();
         this.ctx.arc(x, y, this.firstColumnLine / 2 - 10, 0, Math.PI * 2);
         this.ctx.strokeStyle = "#ffffff";
@@ -104,11 +142,25 @@ class Game {
     }
 
     drawX(x, y) {
-        this.ctx.lineTo()
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = "#ffffff";
+        this.ctx.lineWidth = 10;
+
+        this.ctx.moveTo(x - (this.cellSize) / 2, y - (this.cellSize / 2));
+        this.ctx.lineTo(x + (this.cellSize) / 2, y + (this.cellSize / 2));
+        this.ctx.moveTo(x - (this.cellSize) / 2, y + (this.cellSize / 2));
+        this.ctx.lineTo(x + (this.cellSize) / 2, y - (this.cellSize / 2));
+
+        this.ctx.stroke();
+        this.ctx.closePath();
     }
 
-    drawX(x, y) {
-        this.beginPath();
+    switchPlayer() {
+        if (this.currentPlayer === this.mark1) {
+            this.currentPlayer = this.mark2;
+        } else {
+            this.currentPlayer = this.mark1;
+        }
     }
 
     bindKeys() {
