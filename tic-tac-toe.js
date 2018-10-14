@@ -82,7 +82,7 @@ class Game {
                     this.drawX(this.secondColumnLine * (3 / 4), this.firstRowLine / 2);
                     this.board[0][1] = this.mark1;
                 } else {
-                    this.drawO(this.secondColumnLine * (3 / 4), this.firstRowLine / 2);
+                    this.drawO(this.secondColumnLine * (3 / 4), this.firstRowLine / 2 - 2.5);
                     this.board[0][1] = this.mark2;
                 }
                 this.switchPlayer();
@@ -103,7 +103,7 @@ class Game {
                     this.drawX(this.secondColumnLine * (3 / 4), this.canvasHeight * (5 / 6));
                     this.board[2][1] = this.mark1;
                 } else {
-                    this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight * (5 / 6));
+                    this.drawO(this.secondColumnLine * (3 / 4), this.canvasHeight * (5 / 6) + 2.5);
                     this.board[2][1] = this.mark2;
                 }
                 this.switchPlayer();
@@ -115,7 +115,7 @@ class Game {
                     this.drawX(this.canvasWidth * (5 / 6), this.firstRowLine / 2);
                     this.board[0][2] = this.mark1;
                 } else {
-                    this.drawO(this.canvasWidth * (5 / 6), this.firstRowLine / 2);
+                    this.drawO(this.canvasWidth * (5 / 6) + 2.5, this.firstRowLine / 2 - 2.5);
                     this.board[0][2] = this.mark2;
                 }
                 this.switchPlayer();
@@ -126,7 +126,7 @@ class Game {
                     this.drawX(this.canvasWidth * (5 / 6), this.canvasHeight / 2);
                     this.board[1][2] = this.mark1;
                 } else {
-                    this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight / 2);
+                    this.drawO(this.canvasWidth * (5 / 6) + 2.5, this.canvasHeight / 2);
                     this.board[1][2] = this.mark2;
                 }
                 this.switchPlayer();
@@ -137,7 +137,7 @@ class Game {
                     this.drawX(this.canvasWidth * (5 / 6), this.canvasHeight * (5 / 6));
                     this.board[2][2] = this.mark2;
                 } else {
-                    this.drawO(this.canvasWidth * (5 / 6), this.canvasHeight * (5 / 6));
+                    this.drawO(this.canvasWidth * (5 / 6) + 2.5, this.canvasHeight * (5 / 6) + 2.5);
                     this.board[2][2] = this.mark2;
                 }
                 this.switchPlayer();
