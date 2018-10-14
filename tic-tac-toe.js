@@ -27,6 +27,10 @@ class Game {
         this.validMove = this.validMove.bind(this);
     }
 
+    bindKeys() {
+        document.getElementById("gameCanvas").addEventListener("click", this.readClick.bind(this), false);
+    }
+
     drawBoard() {
         this.ctx.fillStyle = "#ffffff";
         this.ctx.rect(this.firstColumnLine - 5, 0, 10, this.canvasHeight);
@@ -42,7 +46,10 @@ class Game {
         const scaleY = e.target.offsetHeight / rect.height;
         const x = (e.clientX - rect.left) * scaleX;
         const y = (e.clientY - rect.top) * scaleY;
+        this.placeMark(x, y);
+    }
 
+    placeMark(x, y) {
         if (x < this.firstColumnLine) {
             if (y < this.firstRowLine && this.validMove(0, 0)) {
                 if (this.currentPlayer === this.mark1) {
@@ -143,7 +150,6 @@ class Game {
                 this.switchPlayer();
             }
         }
-        console.log(this.board);
     }
 
     drawO(x, y){
@@ -185,9 +191,7 @@ class Game {
         }
     }
 
-    bindKeys() {
-        document.getElementById("gameCanvas").addEventListener("click", this.readClick.bind(this), false);
-    }
+
 }
 
 
