@@ -1,1 +1,1 @@
-# TicTacToe in JS, in progress
+# Just a clean little JS Tic-Tac-Toe
